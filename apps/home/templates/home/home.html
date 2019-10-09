@@ -1,0 +1,161 @@
+{% extends 'core/index.html' %}
+{% load static %}
+
+{% block row %}
+ <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+
+          </div>
+
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Despesas</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Categoria</th>
+                  <th>Descrição</th>
+                  <th>Valor</th>
+                  <th>Data</th>
+                  <th>Usuario</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in object_list %}
+                <tr>
+                     <td><a href="{{ i.get_absolute_url }}">{{ i.nome }} </a></td>
+                <td>{{ i.categoria }}</td>
+                    {% if i.descricao == "" %}
+                  <td>Sem Descrição</td>
+                    {% else %}
+                  <td>{{ i.descricao }}</td>
+                    {% endif %}
+                  <td>{{ i.valor }}</td>
+                  <td>{{ i.data }}</td>
+                  <td>{{ i.usuario }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                   <th>Nome</th>
+                  <th>Categoria</th>
+                  <th>Descrição</th>
+                  <th>Valor</th>
+                  <th>Data</th>
+                  <th>Usuario</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+    <div class="row">
+        <div class="col-md-12">
+          <!-- Block buttons -->
+          <div class="box">
+            <div class="box-body">
+            <a class="btn btn-success btn-block" href="{% url 'nova_despesa' %}" role="button">Nova Despesa</a>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+
+{% endblock row %}
+
+{% block vermelho %}
+ <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{{ gastosAnuais|floatformat:2 }}</h3>
+
+              <p>Gastos Anuais</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+{% endblock vermelho %}
+
+{% block azul %}
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{ depesas_mensais|floatformat:2 }}</h3>
+
+              <p>Meus Gastos Mensais</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      {% endblock azul %}
+
+ {% block verde %}
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+                {% if depesas_diarias == null %}
+                <p>Sem Lançamentos hoje</p>
+                {% endif %}
+              <h3>{{ depesas_diarias|floatformat:2 }}</h3>
+
+              <p>Meus Gastos Diários</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      {% endblock verde %}
+
+{% block amarelo %}
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{{ depesas_mes_anterior }}</h3>
+
+              <p>Despesas Mes Anterior</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      {% endblock amarelo %}

@@ -1,0 +1,32 @@
+{% extends 'core/index.html' %}
+{% load bootstrap %}
+
+{% block row %}
+   <h2 class="page-header">Excluir</h2>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-default">
+            <div class="box-header with-border">
+              <i class="fa fa-warning"></i>
+
+              <h3 class="box-title">Tem Certeza que deseja apagar permanetemente essas informações? </h3>
+            </div>
+
+            <form role="form" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="box-body">
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> {{ object }}!</h4>
+               Os dados depois de apagados não será possível recuperar suas informações.
+
+              </div>
+           <button type="submit" class="btn  btn-block btn-danger" value="confirm">Apagar</button>
+            </div>
+         </form>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+{% endblock %}
+

@@ -1,0 +1,84 @@
+{% extends 'core/index.html' %}
+
+{% block row %}
+ <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+
+          </div>
+          <!-- /.box -->
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Formas de Pagamento</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>nome</th>
+                  <th>descricao</th>
+                  <th>slug</th>
+                  <th>created</th>
+                  <th>modified</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in object_list %}
+                <tr>
+                     <td><a href="{{ i.get_absolute_url }}">{{ i.nome }} </a></td>
+                    {% if i.descricao == "" %}
+                  <td>Sem Descrição</td>
+                    {% else %}
+                  <td>{{ i.descricao }}</td>
+                    {% endif %}
+                  <td>{{ i.slug }}</td>
+                  <td>{{ i.created }}</td>
+                  <td>{{ i.modified }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>nome</th>
+                  <th>descricao</th>
+                  <th>slug</th>
+                  <th>created</th>
+                  <th>modified</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+
+    <div class="row">
+        <div class="col-md-12">
+          <!-- Block buttons -->
+          <div class="box">
+            <div class="box-body">
+            <a class="btn btn-success btn-block" href="{% url 'nova_forma_de_pagamento' %}" role="button">Adicionar Nova Forma de Pagamento</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    <script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+{% endblock row %}
